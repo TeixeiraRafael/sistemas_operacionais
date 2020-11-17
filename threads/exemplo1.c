@@ -11,7 +11,7 @@ struct var_t{
 
 //Deve ser declarado como ponteiro para função
 void *hello(void *i){
-
+	
 	long id;
 	char c;
 	struct var_t *y;
