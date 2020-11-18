@@ -3,7 +3,6 @@ import threading
 from random import randint
 
 reverse = []
-v = []
 
 #inverts a given vector
 def invert(vector):
@@ -18,8 +17,7 @@ def split(a, n):
 thread_count = int(sys.argv[1])
 n = int(sys.argv[2])
 
-for i in range(n):
-    v.append(randint(0,9))
+v = [randint(0,9) for i in range(n)]
 
 subs = list(split(v, thread_count))
 
