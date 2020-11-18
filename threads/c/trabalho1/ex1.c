@@ -59,6 +59,7 @@ Segment *split(int *array, int n, int size)
 			arr_index++;
 		}
 		segments[i] = *seg;
+		free(seg);
 	}
 	return segments;
 }
@@ -68,8 +69,7 @@ Segment *split(int *array, int n, int size)
 */
 int *reassamble(Segment *segments, int n_segments, int final_size)
 {
-	int *result;
-	result = malloc(final_size * sizeof(int));
+	int *result = malloc(final_size * sizeof(int));
 	int i = 0;
 	for (int j = n_segments - 1; j >= 0; --j)
 	{
@@ -114,5 +114,7 @@ int main(int argc, char **argv)
 	int *inverted;
 	inverted = reassamble(segments, n, array_size);
 	print_array(inverted, array_size);
-	return 0;
+
+	free(segments);
+	return EXIT_SUCCESS;
 }
