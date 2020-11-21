@@ -48,11 +48,12 @@ int **random_matrix(int m, int n)
 
     return matrix;
 }
-
+/*
+    Returns de sum of the products of the items of two integer arrays
+*/
 int multiply_and_sum(int *a, int *b, int size)
 {
     int sum = 0;
-
     for (int i = 0; i < size; i++)
     {
         sum += (a[i] * b[i]);
