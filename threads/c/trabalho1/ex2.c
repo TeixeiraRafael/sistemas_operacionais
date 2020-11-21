@@ -89,9 +89,8 @@ Pair *squash_matrix(int l, int c)
 
 void *process(void *arguments)
 {
+    //Argument parsing
     arg_struct *args = (arg_struct *)arguments;
-    int *line;
-    int *column;
     int n = args->n;
     int p = args->p;
     int start = args->start;
@@ -101,6 +100,11 @@ void *process(void *arguments)
     int **B = args->B;
     int **C = args->C;
 
+    //Helper variables
+    int *line;
+    int *column;
+
+    //Main Logic
     for (int i = start; i <= end; ++i)
     {
         line = malloc(n * sizeof(int));
