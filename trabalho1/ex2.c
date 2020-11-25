@@ -91,11 +91,11 @@ void *process(void *arguments)
 {
     //Argument parsing
     arg_struct *args = (arg_struct *)arguments;
+    Pair *map = args->map;
     int n = args->n;
     int p = args->p;
     int start = args->start;
     int end = args->end;
-    Pair *map = args->map;
     int **A = args->A;
     int **B = args->B;
     int **C = args->C;
@@ -134,7 +134,7 @@ int main(int argc, char **argv)
 
     int **A;
     int **B;
-    int **C = random_matrix(m, q);
+    int **C;
 
     A = random_matrix(m, n);
 
