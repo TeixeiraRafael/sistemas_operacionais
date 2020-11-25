@@ -2,7 +2,7 @@
 
 O objetivo deste trabalho é familiarizar-se com o conceito de threads e as sua forma de programação. Para isso, utilizando sua linguagem de programação favorita, você deverá desenvolver soluções, utilzando threads, para os seguintes problemas:
 
-## 1) Escrevendo vetor de tras para frente - (0,3 ponto)
+### 1) Escrevendo vetor de tras para frente - (0,3 ponto)
 
 Faça um programa que inverta a ordem dos elementos de um vetor de inteiros com N valores. Por exemplo, se o vetor contiver os elementos 1, 2, 3, 4, 5 o vetor de saída deverá ser 5, 4, 3, 2, 1. O tamanho do vetor e o número de threads devem ser informados pelo usuário. Os elementos do vetor devem ser gerados de forma aleatória pelo programa. O programa deverá imprimir na tela o vetor de entrada e o vetor de saída.
 
