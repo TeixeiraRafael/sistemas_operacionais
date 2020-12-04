@@ -25,7 +25,7 @@ void credit(Account* account, float amount){
     Checks the ballance of a given account.
 */
 void query(Account account){
-    pthread_rwlock_rdlock(&lock_rw);  //Aqchires read-lock on the shared resource
+    pthread_rwlock_rdlock(&lock_rw);  //Acquires read-lock on the shared resource
     printf("\tAccount %d balance is $%.2f\n", account.id, account.balance);
     pthread_rwlock_unlock(&lock_rw);  //Releases wirte-lock on the shared resource
 };
