@@ -1,39 +1,33 @@
 #include "definitions.h"
 
-//Initializing the pthread mutex.
-
+//Initializing the POSIX read-write lock
+static pthread_rwlock_t lock_rw = PTHREAD_RWLOCK_INITIALIZER;
 
 /*
     Adds the given value to the given account.
 */
 void debit(Account* account, float amount){
-    while(account->status != NONE); //Waits until rescource is available
-    
-    account->status = DEBIT;        //Flags the usage of the resource
+    pthread_rwlock_wrlock(&lock_rw);    //Acquires wirte-lock on the shared resource
     account->balance -= amount;
-    account->status = NONE;         //Frees the usage of the resource
+    pthread_rwlock_unlock(&lock_rw);  //Releases wirte-lock on the shared resource
 };
 
 /*
     Subtracts the given value from the given account.
 */
 void credit(Account* account, float amount){
-    while(account->status != NONE); // Waits until available
-    
-    account->status = CREDIT;   //Flags the usage of the resource
+    pthread_rwlock_wrlock(&lock_rw);    //Acquires wirte-lock on the shared resource
     account->balance += amount;
-    account->status = NONE;     //Frees the usage of the resource
+    pthread_rwlock_unlock(&lock_rw);    //Releases wirte-lock on the shared resource
 };
 
 /*
     Checks the ballance of a given account.
 */
 void query(Account account){
-    while(account.status != NONE && account.status != QUERY); //Waits until no Credit or Debit operations are running
-
-    account.status = QUERY; // Flags the usage of the resource
+    pthread_rwlock_rdlock(&lock_rw);  //Aqchires read-lock on the shared resource
     printf("\tAccount %d balance is $%.2f\n", account.id, account.balance);
-    account.status = NONE;  // Frees the usage of the resource
+    pthread_rwlock_unlock(&lock_rw);  //Releases wirte-lock on the shared resource
 };
 
 /*
@@ -90,14 +84,12 @@ void* process(void* arguments){
 Account initialize(Account *ac, int id){
     ac->id = id;
     ac->balance = (rand() % 10000);
-    ac->status = NONE;
 }
 
 /*
     Driver Code
 */
 int main(int argc, char** argv){
-
     srand(time(NULL));
     int n_accounts = atoi(argv[1]);
     int n_threads = atoi(argv[2]);
@@ -113,10 +105,11 @@ int main(int argc, char** argv){
     for(int i = 0; i < n_accounts; ++i){
         query(accounts[i]);
     }
-       
+
     args_struct* args;
     Operation* operations;
     pthread_t threads[n_threads];
+
     /*
         Generates a random array of operations for each thread and processes it in parallel.
     */
@@ -145,5 +138,5 @@ int main(int argc, char** argv){
         query(accounts[i]);
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }

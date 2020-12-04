@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <semaphore.h>
+#include <fcntl.h> 
 
 typedef struct Account{
     int id;
     float balance;
-    int status;
 } Account;
 
 typedef struct Operation{
@@ -20,4 +21,4 @@ typedef struct args_struct{
     int thread_id;
 } args_struct;
 
-enum operations {NONE = 0 , CREDIT = 1, DEBIT = 2, QUERY = 3} operations;
+enum operations {CREDIT = 0, DEBIT = 1, QUERY = 2} operations;
